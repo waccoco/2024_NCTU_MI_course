@@ -56,7 +56,6 @@ def trainGenerator(batch_size,train_path,image_folder,mask_folder,aug_dict,image
     ## https://keras.io/preprocessing/image/
     ## Generate batches of tensor image data with real-time data augmentation.
     image_datagen = ImageDataGenerator(**aug_dict)
-    mask_datagen = ImageDataGenerator(**aug_dict)
     image_generator = image_datagen.flow_from_directory(
         train_path,
         classes = [image_folder],
@@ -67,6 +66,8 @@ def trainGenerator(batch_size,train_path,image_folder,mask_folder,aug_dict,image
         save_to_dir = save_to_dir,
         save_prefix  = image_save_prefix,
         seed = seed)
+
+    mask_datagen = ImageDataGenerator(**aug_dict)
     mask_generator = mask_datagen.flow_from_directory(
         train_path,
         classes = [mask_folder],
