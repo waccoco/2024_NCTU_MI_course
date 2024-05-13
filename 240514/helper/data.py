@@ -46,7 +46,7 @@ def adjustData(img,mask,flag_multi_class,num_class):
 
 
 def trainGenerator(batch_size,train_path,image_folder,mask_folder,aug_dict,image_color_mode = "grayscale",
-                    mask_color_mode = "grayscale",image_save_prefix  = "image",mask_save_prefix  = "mask",
+                    mask_color_mode = "grayscale",image_save_prefix  = "image", mask_save_prefix  = "mask",
                     flag_multi_class = False,num_class = 2,save_to_dir = None,target_size = (512,512),seed = 1):
     '''
     can generate image and mask at the same time
@@ -78,8 +78,10 @@ def trainGenerator(batch_size,train_path,image_folder,mask_folder,aug_dict,image
         save_to_dir = save_to_dir,
         save_prefix  = mask_save_prefix,
         seed = seed)
+    
     ## zip() 函数用于將可疊代的物件作為參數，將物件中對應的元素打包成元組，然後返回由這些元組組成的物件。
     ## 在 Python 3.x 中為了減少記憶體，zip() 返回的是一個物件。如需展示列表，需手動使用 list() 轉換。
+    
     train_generator = zip(image_generator, mask_generator)
     for (img,mask) in train_generator:
         img,mask = adjustData(img,mask,flag_multi_class,num_class)
